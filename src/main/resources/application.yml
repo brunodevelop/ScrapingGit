@@ -1,0 +1,40 @@
+spring:
+  mvc:
+    async:
+      request-timeout: -1   
+  application:
+    name: ScrapingGit
+  jackson:
+    default-property-inclusion: "NON_NULL"
+
+api:
+  version: 1
+
+
+# lets listen on all ports to ensure we can be invoked from the pod IP
+server:
+  address: 0.0.0.0
+  port: ${SERVER_PORT:8085}
+
+  
+# lets use a different management port in case you need to listen to HTTP requests on 8080
+management:
+  server:
+    address: 0.0.0.0
+    port: ${MANAGEMENT_PORT:8082}
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /
+
+# disable all management endpoints except health
+endpoints:
+  enabled: false
+  health:
+    enabled: true
+
+info:
+  app:
+    name: ScrapingGit
